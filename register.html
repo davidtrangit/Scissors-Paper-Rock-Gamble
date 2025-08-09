@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+</head>
+<body>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>  <!--font-->
+  <link rel="stylesheet" type="text/css" href="Register.css">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h2>Please Create An Account</h2>
+  <div id="registerthings"> 
+  <input type="text" id="regName" placeholder="Username">
+  <br>
+  <input type="password" id="regPassword" placeholder="Password">
+  <br>
+    <button onclick="registerUser()">Register</button>
+  </div>
+  <p id="regMessage"></p>
+ <p><a href="login.html">Already have an account? Log in</a></p>
+
+  <script>
+    async function registerUser() {
+      const name = document.getElementById("regName").value.trim();
+      const password = document.getElementById("regPassword").value;
+
+      if (!name || !password) {
+        document.getElementById("regMessage").textContent = "Please enter both fields.";
+        return;
+      }
+
+      try {
+        const res = await fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, password })
+        });
+
+        if (res.ok) {
+          document.getElementById("regMessage").textContent = "Registration successful!";
+        } else {
+          document.getElementById("regMessage").textContent = "Registration failed.";
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById("regMessage").textContent = "Server error.";
+      }
+    }
+  </script>
+</body>
+</html>

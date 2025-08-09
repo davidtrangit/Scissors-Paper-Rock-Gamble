@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>  <!--font-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <p>Logged in as: <span id="usernameDisplay"></span></p>
+        <button onclick="logout()">Logout</button>
+        <h1>GAMBLE</h1>
+        <div class="centered">
+        <b><label for="options">PICK A HAND: </label></b>
+        <select name="options" id="options">
+            <option value="rock">Rock</option>
+            <option value="paper">Paper</option>
+            <option value="scissors">Scissors</option>
+        </select>
+        <label for="betAmount"><b>BET AMOUNT:</b></label>
+        <input type="number" id="betAmount" min="0" step="10" placeholder="Enter amount" value="10">
+        <button id="playButton" type="button">Play</button>
+        </div>
+        <br>
+     <p>WINS: <span id="wins">0</span></p>
+     <p>LOSSES: <span id="losses">0</span></p>
+     <p>TIES: <span id="ties">0</span></p>
+     <p>WINRATE: <span id="winrate">0%</span></p>
+     <div id="moneyDisplay">
+         <p style="color: yellow;">MONEY: <span id="dollars">$1000</span></p>
+     </div>
+     <p>YOU CHOSE: <span id="myChoice"></span></p>
+     <p>ENEMY CHOSE: <span id="enemy"></span></p>
+     <p id="result"></p>
+     <div id="moneyAddOrLoss">
+         <p id="moneyChange"></p>
+     </div>
+        <div id="loading-screen">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
+</select>
+
+
+    </main> 
+    <script src="tester.js"></script>
+</body>
+</html>

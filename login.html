@@ -1,0 +1,72 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: 'Ubuntu';
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #loginMessage {
+      margin-top: 10px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-box">
+    <h2>Login</h2>
+    <input type="text" id="loginName" placeholder="Username">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+    <p id="loginMessage"></p>
+  </div>
+
+  <script>
+    async function loginUser() {
+      const name = document.getElementById("loginName").value;
+      const password = document.getElementById("loginPassword").value;
+
+      const res = await fetch("http://localhost:3000/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("username", name);
+        window.location.href = "Web.html";
+      } else {
+        document.getElementById("loginMessage").textContent = data.message || "Login failed.";
+      }
+    }
+  </script>
+</body>
+</html>

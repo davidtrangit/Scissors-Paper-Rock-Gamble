@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      color: #333;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #f0f0f0;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Registered Accounts</h2>
+  <ul id="userList"></ul>
+
+  <script>
+    window.onload = async function () {
+      const userList = document.getElementById("userList");
+
+      try {
+        const response = await fetch('http://localhost:3000/users');
+        if (!response.ok) throw new Error('Failed to fetch users');
+
+        const users = await response.json();
+
+        if (users.length === 0) {
+          userList.innerHTML = "<li>No registered users found.</li>";
+          return;
+        }
+
+      users.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = `Username: ${user.name} <> Password: ${user.password}`;
+        userList.appendChild(li);
+      });
+
+      } catch (error) {
+        userList.innerHTML = `<li>Error loading users: ${error.message}</li>`;
+      }
+    };
+  </script>
+</body>
+</html>
